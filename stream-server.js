@@ -1,9 +1,9 @@
 const PROTO_PATH = __dirname + '/sample.proto';
 
-const grpc = require('grpc');
-const protoLoader = require('@grpc/proto-loader');
-const supervillains = require('supervillains');
 const _ = require('lodash');
+const grpc = require('grpc');
+const supervillains = require('supervillains');
+const protoLoader = require('@grpc/proto-loader');
 
 const { Readable } = require('stream')
 // Suggested options for similarity to existing grpc.load behavior
@@ -21,29 +21,19 @@ const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
 const sampleservices = protoDescriptor.sampleservices;
 
 const stream = async (call) => {
-    console.log(`You asked me to create ${call.request.number} supervillians'`);
+    console.log(`You asked me to create '${call.request.number}' supervillians`);
 
-    const fn = () => {
+    const create = () => {
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                call.write({
-                    text: supervillains.random()
-                });
-                resolve();
-            }, _.random(500, 1500));
+            setTimeout(() => resolve(supervillains.random()), _.random(500, 1500));
         });
     }
 
-    let i = 0;
-    while (true) {
-        await fn();
-        if (i < call.request.number) {
-            i++;
-        } else {
-            break;
-        }
+    for (let i = 0; i < call.request.number; i++) {
+        const supervillain = await create();
+        call.write({ text: supervillain });
     }
-    console.log('Im done');
+
     call.end();
 };
 
@@ -56,5 +46,3 @@ const createServer = () => {
 const server = createServer();
 server.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
 server.start();
-
-

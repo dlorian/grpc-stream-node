@@ -1,8 +1,9 @@
 const PROTO_PATH = __dirname + '/sample.proto';
 
-const readline = require('readline');
 const grpc = require('grpc');
+const readline = require('readline');
 const protoLoader = require('@grpc/proto-loader');
+
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
     keepCase: true,
     longs: String,
@@ -21,8 +22,10 @@ const rl = readline.createInterface({
     terminal: false
 });
 
+console.log('Please type in an Integer in order to create some amount of supervillians :-)')
+
 rl.on('line', function (line) {
     const stream = client.stream({ number: parseInt(line) });
     stream.on('data', (streamResponse) => console.log(streamResponse.text));
-    stream.on('end', (err, reponse)=> console.log('The end'));
+    stream.on('end', () => console.log('\nThis is it!'));
 })
