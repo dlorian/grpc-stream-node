@@ -1,5 +1,5 @@
-# grpc-node-sample
-Simple GRPC sample application
+# grpc-samples
+Simple GRPC sample applications
 
 ## Sample implementations
 
