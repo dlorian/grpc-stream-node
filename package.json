@@ -1,0 +1,17 @@
+{
+  "name": "@dlorian/grpc",
+  "version": "0.0.1",
+  "description": "Simple GRCP sample project\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dlorian",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.3.0",
+    "grpc": "^1.15.1",
+    "lodash": "^4.17.11",
+    "supervillains": "^2.1.0"
+  }
+}
